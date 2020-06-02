@@ -3,7 +3,6 @@ import Profile from "./Profile";
 import { connect } from "react-redux";
 import {setUserProfile, getProfile, getStatus, updateStatus} from '../../redux/profile-reducer';
 import { withRouter } from "react-router-dom";
-import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
 import { compose } from "redux";
 
 class ProfileContainer extends React.Component {
@@ -16,7 +15,7 @@ class ProfileContainer extends React.Component {
     render() {
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} />
+                <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
             </div>
         );
     }
