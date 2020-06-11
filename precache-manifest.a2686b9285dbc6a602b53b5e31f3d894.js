@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/react-social-kama/static/js/2.7a78b74d.chunk.js"
   },
   {
-    "revision": "18031c9f63855ba19498",
+    "revision": "feb4f4659d1af15c9b24",
     "url": "/react-social-kama/static/css/main.92a039aa.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = [
     "url": "/react-social-kama/static/media/user.f8a15e74.png"
   },
   {
-    "revision": "18031c9f63855ba19498",
-    "url": "/react-social-kama/static/js/main.18031c9f.chunk.js"
+    "revision": "feb4f4659d1af15c9b24",
+    "url": "/react-social-kama/static/js/main.feb4f465.chunk.js"
   },
   {
     "revision": "7d69db3b9bec28beca76",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/react-social-kama/static/css/1.36301435.chunk.css"
   },
   {
-    "revision": "259dcf6de368db0cbc6d24febd56896b",
+    "revision": "50da8c6f5d4e4d2869e4abeea848bdb5",
     "url": "/react-social-kama/index.html"
   }
 ];
