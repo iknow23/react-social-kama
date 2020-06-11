@@ -1,5 +1,4 @@
-import { authAPI } from '../api/api';
-import { getAuth } from './auth-reducer';
+import {getAuthUserData} from './auth-reducer';
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
@@ -8,13 +7,13 @@ let initialState = {
 };
 
 const appReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case INITIALIZED_SUCCESS: {
+    switch (action.type) {
+        case INITIALIZED_SUCCESS:
             return {
                 ...state,
                 initialized: true
             }
-        }
+
         default:
             return state;
     }
@@ -22,14 +21,13 @@ const appReducer = (state = initialState, action) => {
 
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 
-export const initializeApp = () => {
-    return dispatch => {
-        const promise = dispatch(getAuth());
+export const initializeApp = () => dispatch => {
+    const promise = dispatch(getAuthUserData());
 
-        promise.then(() => {
+    Promise.all([promise])
+        .then(() => {
             dispatch(initializedSuccess());
-        })
-    }
+        });
 }
 
 export default appReducer;
