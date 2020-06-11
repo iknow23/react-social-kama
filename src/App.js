@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import store from "./redux/redux-store";
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import { Provider } from 'react-redux';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
@@ -54,11 +54,11 @@ const AppContainer = compose(
 
 const SocialApp = props => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <AppContainer />
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
 
