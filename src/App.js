@@ -1,4 +1,7 @@
 import React from 'react';
+import store from "./redux/redux-store";
+import {BrowserRouter} from "react-router-dom";
+import { Provider } from 'react-redux';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -41,7 +44,19 @@ const mapStateToProps = state => ({
     initialized: state.app.initialized
 });
 
-export default compose(
+const AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {initializeApp})
 )(App);
+
+const SocialApp = props => {
+    return (
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer />
+            </Provider>
+        </BrowserRouter>
+    )
+}
+
+export default SocialApp
