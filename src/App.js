@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import store from "./redux/redux-store";
-import {HashRouter} from "react-router-dom";
+import {HashRouter, Switch, Redirect} from "react-router-dom";
 import { Provider } from 'react-redux';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
@@ -17,8 +17,17 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 class App extends React.Component {
+    // отлов сетевых запросов по всему app
+    catchAllUnhandledErrors = unhandledrejection => {
+        alert(unhandledrejection);
+    }
     componentDidMount() {
         this.props.initializeApp();
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors);
     }
 
     render() {
@@ -31,12 +40,23 @@ class App extends React.Component {
                 <HeaderContainer />
                 <Navbar />
                 <div className='app-wrapper-content'>
-                    <Suspense fallback={<Preloader />}>
-                        <Route path='/profile/:userId?' render={ () => <ProfileContainer /> }/>
-                        <Route path='/dialogs' render={ () => <DialogsContainer /> }/>
-                    </Suspense>
+                    <Switch>
+                        <Route exact path='/' render={ () => <Redirect to={'/profile'} /> }/>
+                        <Route path='/profile/:userId?' render={ () => (
+                            <Suspense fallback={<Preloader />}>
+                                <ProfileContainer />
+                            </Suspense>
+                        )}/>
+                        <Route path='/dialogs' render={ () => (
+                            <Suspense fallback={<Preloader />}>
+                                <DialogsContainer />
+                            </Suspense>
+                        )}/>
                         <Route path='/users' render={ () => <UsersContainer /> }/>
+                        <Route path='/login/vk' render={ () => <div>Vkontakte</div> }/>
                         <Route path='/login' render={ () => <Login /> }/>
+                        <Route path='*' render={ () => <div>404 NOT FOUND</div> }/>
+                    </Switch>
                 </div>
             </div>
         )
