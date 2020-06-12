@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/react-social-kama/precache-manifest.a2686b9285dbc6a602b53b5e31f3d894.js"
+  "/react-social-kama/precache-manifest.0c64aa8b582f258564d67d431ebac67f.js"
 );
 
 workbox.clientsClaim();
