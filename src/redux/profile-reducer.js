@@ -1,4 +1,5 @@
 import {profileAPI, usersAPI} from "../api/api";
+import { stopSubmit } from "redux-form";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -76,11 +77,26 @@ export const updateStatus = status => async dispatch => {
         dispatch(setStatus(status));
     }
 }
+
 export const savePhoto = file => async dispatch => {
     const response = await profileAPI.savePhoto(file);
 
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos));
+    }
+}
+
+export const saveProfile = profile => async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+    const response = await profileAPI.saveProfile(profile);
+
+    if (response.data.resultCode === 0) {
+        dispatch(getUserProfile(userId));
+    } else {
+        const message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+        dispatch(stopSubmit("editProfile", {_error: message})); // распарсить строку ошибки и сформировать для нужного поля, результат должен быть как в ниэней строке
+        // dispatch(stopSubmit("editProfile", {'contacts': {'facebook': message} }));
+        return Promise.reject(message);
     }
 }
 
